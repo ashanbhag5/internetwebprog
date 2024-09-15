@@ -1,0 +1,39 @@
+1. What is HTML? What does it do?
+HTML stands for Hyper Text Markup Language and its function is to create the structure behind web pages.
+HTML consists of various elements, that are responsible for telling search engines how to display page content. 
+Some examples of the blocks used by HTML are: headings, lists, images, links, and more.
+
+
+2. What is CSS? What does it do?
+CSS stands for Cascading Style Sheets and it adds style to each of the HTML elements. It can change
+properties such as font, color, border width and more. Fundamentally, CSS enables the separation of
+content and presentation. 
+
+3. Access https://www.fordham.edu/. In your own words, describe how this webpage uses
+structure to convey meaning and navigation options to the user.
+They have two header bars at the top with the topmost one focusing on user specific information
+such as login (which is placed right in the middle of the webpage attracting the user's eyes). The navbar
+below focuses on school specific elements such as Mission and Academics. The webpage separates itself
+into multiple parts with the bottom parts detailing the different campuses, fordham events and more details.
+
+
+4. What is an HTML element? Tag? Attribute?
+HTML tags are used to hold the HTML element. HTML element holds the content. 
+HTML attributes are used to describe the characteristic of an HTML element in detail.
+
+5. What are the parts of a CSS rule?
+The two main parts of a CSS rule are the selector and the declaration: the selector determines which element
+will have the styles applied and the declaration is the set of instructions that specifies the appearance of the element
+
+6. Explain how CSS rules cascade. 
+CSS rules cascade in a hierarchical manner, meaning that the rule with the highest specificity 
+or importance takes precedence over rules with lower specificity.
+
+7. If you have a directory called project-1 that contains two subdirectories, html-files and
+images. In the html-files directory you have an HTML file called html-1.html that has an
+img element with a src attribute, write out the value of the src attribute to access an
+image file called pinecone.jpg in the images directory.
+<img src="images/pinecone.jpg"> </img>
+
+8. What is the default behavior when submitting a HTML form?
+This means that the form data will be appended to the URL as query parameters.
