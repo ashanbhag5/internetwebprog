@@ -2,6 +2,8 @@
 .ad {
   text-align: center;
   color: #000080;
+
+  /*Changes color of heading*/
 }
 
 .heading p {
@@ -10,6 +12,9 @@
 }
 .container {
   display: flex;
+  /*I tried to use Inline block and other ways but flex ended up being the most convenient*/
+  /*Also, I didn't have to look this up as I have been coding web pages using html/css/bootstrap 
+  and more since middle school*/
 }
 
 .left,
@@ -18,11 +23,14 @@
   text-align: center;
   list-style-position: inside;
   align-items: center;
+  /*Uses flex align to keep the bullet points aligned in the middle but on their respective sides*/
 }
 table {
   margin: 10px auto;
   padding: 0;
+  /*Adds margin to the table*/
 }
 li {
   margin-bottom: 30px;
+  /*Changes distance between each bullet point*/
 }

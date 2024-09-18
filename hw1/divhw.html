@@ -7,12 +7,16 @@
         padding: 20px 30px;
         margin: 20px 5%;
         text-align: center;
+        /*Used float to make sure that the divs are next to each other*/
       }
       .item {
-        width: 100px;
         float: left;
+        width: 100px;
         height: 100px;
+        /*Ensures the width and height of each div is 100px*/
       }
+
+      /*Each id changes the color of that specific div*/
       #div1 {
         background-color: beige;
       }
@@ -25,6 +29,7 @@
     </style>
   </head>
   <body>
+    <!--The two classes might be redundant and in a more synthesized version I would keep it with one-->
     <div class="container">
       <div class="item" id="div1">Hello1</div>
       <div class="item" id="div2">Hello2</div>
