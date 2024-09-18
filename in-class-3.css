@@ -32,3 +32,8 @@
   margin: 10px;
   background-color: blue;
 }
+
+body,
+html {
+  height: 100%;
+}
