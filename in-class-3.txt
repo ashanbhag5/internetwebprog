@@ -1,4 +1,4 @@
-1. The foreground property allows you to specify the color of text inside an element.
+1. The color property allows you to specify the color of text inside an element.
 2. Typography can be defined as “the art and technique of arranging type in order to make
 language visible”.
 3. The object-fit CSS property sets how the content of a replaced element, such as an <img>
