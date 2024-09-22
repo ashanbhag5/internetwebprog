@@ -1,0 +1,15 @@
+The central difference between flexbox and css grid is that flexbox is one dimensional
+whereas grid is two dimensional. For flexbox you can arrange items in a 
+column or a row layout; but, a two dimensional layout means that
+Provides a grid-based system for arranging items in rows and columns, 
+offering more granular control over layout.
+
+Common use cases for flexbox:
+Creating horizontal or vertical navigation menus.
+Centering elements within a container.
+Distributing space evenly among items.
+
+Common uses cases for CSS grid:
+Designing responsive websites with complex layouts.
+Creating grid-based interfaces like dashboards or article layouts.
+Implementing advanced layout patterns
