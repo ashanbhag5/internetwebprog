@@ -1,85 +1,181 @@
 <html>
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <style type="text/css">
       .grid {
         display: grid;
-        grid-template-columns: 2fr 5fr;
-        grid-template-rows: 70px 1fr;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(5, 100px);
       }
 
       .sidebar {
         grid-column: 1;
         grid-row: 1 / 3;
         margin-left: 50px;
+        font-family: "Raleway";
       }
       .divider {
-        grid-column: 2; /* Place the divider between the sidebar and main content */
-        grid-row: 1 / 5; /* Span the entire height */
-        background-color: #333; /* Black vertical line */
+        grid-column: 3 / 5; /* Place the divider between the sidebar and main content */
+        grid-row: 1 / 2; /* Span the entire height */
+        background-color: rgba(211, 211, 211, 0.5); /* Black vertical line */
         width: 1px;
         margin-right: 50px;
         height: 100vh;
       }
       .header {
-        grid-column: 2;
+        grid-column: 3 / 7;
         grid-row: 1;
+        text-align: center;
+        margin-top: 30px;
       }
       .headin {
-        grid-column: 2;
+        grid-column: 3 / 6;
         grid-row: 2;
         margin-left: 50px;
       }
       .main {
-        grid-column: 2;
+        font-family: "Raleway";
+        grid-column: 3 / 7;
         grid-row: 3;
+        margin-left: 50px;
       }
 
       #sidebar-head {
         font-size: 0.875rem;
         letter-spacing: 0.01rem;
         font-weight: 600;
+
         color: #900028;
       }
 
       .grid-horizontal-list {
         display: grid;
-        grid-column: 2 / 5;
+        gap: 0;
+
+        grid-column: 2 / 3;
         grid-row: auto;
         grid-auto-flow: column;
-        grid-gap: 1px;
+        grid-gap: 0px;
         list-style-type: none;
         color: #333;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 0.875rem;
         letter-spacing: 0.01rem;
       }
 
       #heading {
-        font-family: sans-serif;
+        font-family: "Raleway";
         color: #900028;
-        line-height: 1.2;
-        letter-spacing: -0.03rem;
+        font-size: 50px;
         font-weight: 300;
+        line-height: 0.5;
+        letter-spacing: -0.03rem;
+      }
+      .grid-horizontal-list li {
+        position: relative; /* Set position relative for the pseudo-element */
+        margin: 0; /* Remove margins */
+        padding: 0; /* Remove padding */
+        display: flex; /* Use flex to center content vertically */
+        align-items: center; /* Center items vertically */
+        justify-content: center; /* Center items horizontally */
+      }
+
+      .grid-horizontal-list li::after {
+        content: "";
+        position: absolute;
+        bottom: -5px; /* Adjust the offset as needed */
+        left: 0;
+        width: 100%;
+        height: 2px; /* Adjust the line thickness as needed */
+        border-bottom: 1px solid #000; /* Adjust the line color and style */
+        opacity: 0; /* Initially hide the line */
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .grid-horizontal-list li:hover::after {
+        opacity: 1;
+      }
+      .container {
+        overflow: auto; /* Clearfix for floated elements */
+      }
+      .container {
+        display: flex; /* Use flexbox for easier layout */
+
+        align-items: center; /* Vertically center the content */
+      }
+
+      .container img {
+        height: auto;
+        width: 300px;
+        grid-column: 4;
+        grid-row: 3;
+      }
+
+      .container .text {
+        float: right; /* Float the text to the right */
+        width: 200px; /* Set the text width */
+      }
+      #gray-box {
+        height: 100px;
+        width: 350px;
+        background-color: hsl(0, 0%, 91%);
+        width: 270px; /* Set a width for the box */
+        height: 80px; /* Set a height for the box */
+        display: flex; /* Use flexbox for alignment */
+
+        align-items: center; /* Center vertically */
+        color: black; /* Set text color to white for contrast */
+        font-size: 20px; /* Set font size */
+        border-left: 2px solid #900028;
+        margin-bottom: 50px;
+      }
+
+      #gray-box li {
+        font-size: 15px;
+        list-style-type: none;
+      }
+      #red-box {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        background-color: #900028;
+      }
+      #red-box h2 {
+        color: white;
+        font-size: 18px;
       }
     </style>
   </head>
   <body>
     <div class="grid">
       <div class="sidebar">
-        <h3 id="sidebar-head">Majors and Minors</h3>
-        <div id="gray-box"></div>
+        <h3 id="sidebar-head" style="margin-bottom: 50px">Majors and Minors</h3>
+        <div id="gray-box">
+          <ul>
+            <li>What's Your passion?</li>
+            <li>Accelerated Degree Programs</li>
+          </ul>
+        </div>
+        <div id="red-box"><h2>Majors and Minors</h2></div>
       </div>
       <div class="divider"></div>
       <div class="header">
         <ul class="grid-horizontal-list">
           <li>Home</li>
-          <li>\</li>
+          <li id="divider">/</li>
           <li>Admissions and Aid</li>
-          <li>\</li>
+          <li id="divider">/</li>
           <li>Undergraduate Admission</li>
-          <li>\</li>
+          <li id="divider">/</li>
           <li>Majors and Minors</li>
-          <li>\</li>
+          <li id="divider">/</li>
           <li>Computer Science</li>
         </ul>
       </div>
@@ -87,7 +183,62 @@
       <div class="main">
         <p>Degree Options: Major, Minor</p>
         <p>Locations: Lincoln Center, Rose Hill</p>
-        <p>Visit the Computer and Information Science Department</p>
+        <p>
+          Visit the
+          <span style="color: #900028; text-decoration: underline"
+            ><a style="color: inherit" href="https://my.fordham.edu"
+              >Computer and Information Science Department
+            </a></span
+          >
+        </p>
+        <span style="font-size: 20px">
+          <p>
+            Wherever there’s a computer, there’s a skilled person developing,
+            maintaining, hacking, advancing or simply using it. Be that person.
+          </p>
+        </span>
+        <div class="container">
+          <span id="vertical-text">
+            <p>
+              It’s difficult to imagine life without computers when they’re so
+              central to our information-driven global society. But it’s not
+              difficult to imagine the amazing pursuits you’ll be prepared for
+              with a degree in computer science from Fordham’s department of
+              Computer and Information Sciences. The computer science major
+              emphasizes science and technology, including software design and
+              programming, computer architecture and functions, and the
+              development of an ability to analyze and solve problems in using
+              the computer as a tool.
+            </p>
+            <p>
+              The computer science major emphasizes science and technology,
+              including software design and programming, computer architecture
+              and functions, and the development of an ability to analyze and
+              solve problems in using the computer as a tool.
+            </p>
+          </span>
+          <img
+            id="img1"
+            src="https://www.fordham.edu/media/review/content-assets/migrated/images/iStock_000021097427Medium.jpg"
+          />
+        </div>
+        <p>
+          Get inspired by the classes we offer. Programming. Bioinformatics.
+          Robotics. Video game design. Cyber security. Networking. Database
+          management. Health and medical informatics.
+        </p>
+        <p>
+          Our faculty members are active researchers driven by intellectual
+          curiosity and the desire to make an impact. Join them in one of our
+          labs. Requirements: open mind, warm heart, and lots of passion.
+        </p>
+        <p>
+          You’ll learn more than computer science here. You’ll also study
+          philosophy, theology, history, mathematics, languages, and the
+          performing arts through Fordham’s common core curriculum, the
+          centerpiece of our liberal arts education. We want you to excel in
+          your field—and as a human being.
+        </p>
       </div>
     </div>
   </body>
