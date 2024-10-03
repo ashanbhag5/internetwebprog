@@ -6,6 +6,7 @@
       }
     </style>
     <script>
+      // Wait for the entire page to load
       window.addEventListener("load", function (e) {
         var containerDiv = document.getElementById("container");
         var textNode = document.createTextNode("in class 5");
@@ -14,15 +15,18 @@
         containerDiv.classList.add("container-color");
         const eventButton = document.getElementById("event-button");
 
-        buttonElement.addEventListener("click", function () {
-          const appendDiv = document.createElement("div");
+        document
+          .getElementById("event-button")
+          .addEventListener("click", function (e) {
+            console.log("hillo");
+            const appendDiv = document.createElement("div");
 
-          const appendDivText = document.createTextNode("new text");
+            const appendDivText = document.createTextNode("new text");
 
-          appendDiv.appendChild(appendDivText);
+            appendDiv.appendChild(appendDivText);
 
-          containerDiv.appendChild(appendDiv);
-        });
+            containerDiv.appendChild(appendDiv);
+          });
       });
     </script>
   </head>
