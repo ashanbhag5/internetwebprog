@@ -1,0 +1,41 @@
+1. What is javascript? How does an interpreted programming language differ from a
+compiled language?
+JavaScript is primarily used to add interactivity to web pages.
+From handling user interactions to fetching data,
+Javascript can make it open to user interactivity
+
+For an interpreted language, the code is executed directly
+whereas for a compiled language the code is translated
+into machine code First
+
+2. Contrast dynamically typed programming languages with statically typed ones. And
+contrast strongly typed programming languages with weakly typed ones. (google these)
+Dynamically types language determines the datatype of a variable at runtime
+which means you can assign different types of values to a variable throughout the
+program's execution.
+Statically typed languages determine the data type of a variable at compile time.
+An example of this would be typescript where each variable and object type is defined
+Strongly typed languages enforce strict type checking which means you can't perform 
+operations on values of incompatible types whereas weakly typed languages
+have looser type checking allowing implicit type conversions
+
+3. What is the difference between var, let, and const when declaring variables in JS?
+Var: can be accessed before declared and redeclared within same scope
+Let: block-scoped and only accessible within the block which declared
+Const: block-scoped but cannot be redeclared within scope
+
+4. What are anonymous functions? Higher order functions? Callback functions? First class
+functions?
+Anonymous functions are functions that don't have a specific name
+Higher order functions are functions that take other functions as arguments or return
+functions as results
+Callback functions are functions passed as arguments to other functions
+First class functions are functions that can be treated like any other value
+in a programming language which means it can be passed around,
+assigned and returned
+
+
+5. Define objects in JavaScript.
+Objects are collections of key-value pairs, where the keys are properties and the 
+values are data associated with those properties.
+You can create objects with Object Literals or Constructor Functions

@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample Page</title>
+    <style>
+      .container-color {
+        color: blue;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js">
+          $(document).ready(function() {
+        $('#container').text('in class 5').attr('class', 'container-color');
+
+        $('#event-button').on('click', function() {
+          $('<div>').text('new text').appendTo('#container');
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Content will be updated by JavaScript once the page loads -->
+    </div>
+    <button id="event-button">click me</button>
+  </body>
+</html>
