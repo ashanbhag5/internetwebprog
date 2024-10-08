@@ -1,0 +1,42 @@
+1. What is the DOM? What is meant by the DOM tree?
+The Document Object Model (DOM) is a programming interface that allows developers to 
+manipulate web pages by representing them as objects and nodes.
+The DOM tree refers to the hierarchical structure of the document. In this tree, each element, attribute, 
+and piece of text in the HTML or XML is represented as a "node," and these nodes are connected in a 
+parent-child relationship.
+
+2. What is an XSS attack? How do they work? How can you guard against them?
+XSS is a type of web security vulnerability where malicious scripts are injected into a trusted website. 
+Attackers often exploit vulnerabilities in input validation or output encoding to inject these scripts. 
+When a user visits the compromised page, the injected script is executed in the user's browser context, 
+allowing the attacker to perform malicious actions like stealing data, hijacking sessions, or redirecting users.
+
+Input validation should be enforced to prevent malicious scripts from being injected, 
+and output encoding should be used to prevent scripts from being executed. 
+
+3. What is an event in JavaScript?
+In JavaScript, an event is a notification that something has happened in a web page. It could be a user interaction like a 
+button click, mouse movement, or keyboard press, or it could be a system-generated event like a page load or 
+window resize.
+
+4. How does a DOM eventListener work? What are the parameters it is expecting?
+A DOM event listener is a JavaScript function that is called when a specific event occurs on an element.
+
+Parameters of addEventListener():
+
+type: The type of event to listen for (e.g., click, mouseover, keydown).
+listener: The function to be called when the event occurs.
+options (optional): An object that specifies additional options, such as:
+useCapture: Whether to use event capture (true) or event bubbling (false).
+passive: Whether the event listener should be passive (true) or active (false)
+
+5. What is jQuery? Why use it? How do we load jQuery onto a page?
+jQuery is a fast, lightweight JavaScript library that simplifies HTML document traversing, event handling,
+ animating, and Ajax interactions for rapid web development. It is designed to make scripting easier by
+  providing an easy-to-use API that works across a wide range of browsers.
+
+Query provides a wide range of features, including AJAX, animations, event handling, and utility functions, 
+making it a versatile tool for web development.
+
+  You can load jQuery in your project using a CDN (Content Delivery Network) or by downloading it and including it locally.
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
