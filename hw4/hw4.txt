@@ -38,5 +38,5 @@ jQuery is a fast, lightweight JavaScript library that simplifies HTML document t
 Query provides a wide range of features, including AJAX, animations, event handling, and utility functions, 
 making it a versatile tool for web development.
 
-  You can load jQuery in your project using a CDN (Content Delivery Network) or by downloading it and including it locally.
+  You can load jQuery in your project using a CDN or by downloading it and including it locally.
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

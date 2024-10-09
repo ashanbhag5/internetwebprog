@@ -1,0 +1,17 @@
+<html>
+  <head></head>
+  <body>
+    <h1>Recipes</h1>
+    <div id="recipeList"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $.get("http://localhost:3000/recipes", function (data) {
+          console.log(data);
+        });
+      });
+    </script>
+  </body>
+</html>

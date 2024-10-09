@@ -1,0 +1,165 @@
+{
+  "recipes": [
+    {
+      "name": "Spaghetti Bolognese",
+      "ingredients": [
+        {
+          "quantity": "400g",
+          "name": "spaghetti",
+          "type": "Pasta"
+        },
+        {
+          "quantity": "1 tbsp",
+          "name": "olive oil",
+          "type": "Condiments"
+        },
+        {
+          "quantity": "1",
+          "name": "onion, chopped",
+          "type": "Produce"
+        },
+        {
+          "quantity": "2",
+          "name": "garlic cloves, minced",
+          "type": "Produce"
+        },
+        {
+          "quantity": "400g",
+          "name": "ground beef",
+          "type": "Meat"
+        },
+        {
+          "quantity": "800g",
+          "name": "canned tomatoes",
+          "type": "Canned Goods"
+        },
+        {
+          "quantity": "2 tbsp",
+          "name": "tomato paste",
+          "type": "Condiments"
+        },
+        {
+          "quantity": "1 tsp",
+          "name": "dried oregano",
+          "type": "Spices"
+        },
+        {
+          "quantity": "1 tsp",
+          "name": "dried basil",
+          "type": "Spices"
+        },
+        {
+          "quantity": "1/2 tsp",
+          "name": "salt",
+          "type": "Spices"
+        },
+        {
+          "quantity": "1/4 tsp",
+          "name": "black pepper",
+          "type": "Spices"
+        }
+      ],
+      "steps": [
+        "Cook spaghetti according to package instructions.",
+        "Heat olive oil in a large pan over medium heat.",
+        "Add onion and garlic, cook until softened.",
+        "Add ground beef, cook until browned.",
+        "Stir in canned tomatoes, tomato paste, oregano, basil, salt, and pepper.",
+        "Simmer for 20 minutes, stirring occasionally.",
+        "Serve sauce over spaghetti."
+      ],
+      "timers": [0, 0, 5, 10, 0, 20, 0],
+      "imageURL": "https://example.com/spaghetti-bolognese.jpg",
+      "originalURL": "https://example.com/recipe/spaghetti-bolognese"
+    },
+    {
+      "name": "Chicken Caesar Salad",
+      "ingredients": [
+        {
+          "quantity": "2",
+          "name": "chicken breasts, grilled and sliced",
+          "type": "Meat"
+        },
+        {
+          "quantity": "4 cups",
+          "name": "romaine lettuce, chopped",
+          "type": "Produce"
+        },
+        {
+          "quantity": "1/2 cup",
+          "name": "Caesar dressing",
+          "type": "Condiments"
+        },
+        {
+          "quantity": "1/4 cup",
+          "name": "parmesan cheese, grated",
+          "type": "Dairy"
+        },
+        {
+          "quantity": "1 cup",
+          "name": "croutons",
+          "type": "Baking"
+        }
+      ],
+      "steps": [
+        "In a large bowl, toss lettuce with Caesar dressing.",
+        "Top with grilled chicken slices, parmesan cheese, and croutons.",
+        "Serve immediately."
+      ],
+      "timers": [0, 0, 0],
+      "imageURL": "https://example.com/chicken-caesar-salad.jpg",
+      "originalURL": "https://example.com/recipe/chicken-caesar-salad"
+    },
+    {
+      "name": "Pancakes",
+      "ingredients": [
+        {
+          "quantity": "1 1/2 cups",
+          "name": "all-purpose flour",
+          "type": "Baking"
+        },
+        {
+          "quantity": "3 1/2 tsp",
+          "name": "baking powder",
+          "type": "Baking"
+        },
+        {
+          "quantity": "1 tsp",
+          "name": "salt",
+          "type": "Spices"
+        },
+        {
+          "quantity": "1 tbsp",
+          "name": "sugar",
+          "type": "Baking"
+        },
+        {
+          "quantity": "1 1/4 cups",
+          "name": "milk",
+          "type": "Dairy"
+        },
+        {
+          "quantity": "1",
+          "name": "egg",
+          "type": "Dairy"
+        },
+        {
+          "quantity": "3 tbsp",
+          "name": "butter, melted",
+          "type": "Dairy"
+        }
+      ],
+      "steps": [
+        "In a large bowl, sift together flour, baking powder, salt, and sugar.",
+        "Make a well in the center and pour in milk, egg, and melted butter.",
+        "Mix until smooth.",
+        "Heat a lightly oiled griddle or frying pan over medium-high heat.",
+        "Pour or scoop the batter onto the griddle, using about 1/4 cup for each pancake.",
+        "Brown on both sides and serve hot."
+      ],
+      "timers": [5, 0, 0, 2, 5, 0],
+      "imageURL": "https://example.com/pancakes.jpg",
+      "originalURL": "https://example.com/recipe/pancakes"
+    }
+  ]
+}
