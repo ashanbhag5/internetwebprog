@@ -1,0 +1,59 @@
+1. What is HTTP? What are the different HTTP request methods and how do they differ?
+HTTP is a protocol used to transfer data between a client and a server on the internet.
+It is a request-response protocol 
+Different HTTP request methods:
+GET - retrieve data from a server, request a webpage, image or resource
+POST - send data to a server to be processed, often used to submit forms
+PUT - update or create a resource on the server
+DELETE - delete a resource from a server
+HEAD - requests the headers of the response
+
+
+2. What is an API? What is JSON?
+An Application Programming Interface is a set of rules that allow software applications
+to communicate with each other. API defines how requests and responses should be
+formatted between a client 
+JavaScript Object Notation is a text-based data interchange format used to store data.
+Usually represents data as key-value pairs, similar to dictionary
+Popular because it's efficient for data transmission
+
+3. What is AJAX? What is meant by asynchronous code?
+Asynchronous Javascript And XML is a technique used to update parts of a 
+web page without reloading the entire page. Allows web applications
+to send and receive data asynchronously from a server in the 
+background. 
+Asynchronous code is where operations can run independently and the program
+can continue executing without waiting for those operations to complete. Commonly used
+for tasks that involve waiting for external resources, like network requests, file I/O
+
+4. What is REST and what are resources?
+Representational State Transfer is an architectural style for designing networked
+applications, often used to create APIs that interact with web services.
+Relies on a stateless, client-server communication model.
+Resources refer to any identifiable piece of data that can be addressed over
+the network. 
+
+ If my application had a concept called posts and
+was designed in a RESTful way, what would the URI and HTTP request method be to:
+a. retrieve multiple posts
+URI: /posts
+HTTP Method: GET
+b. retrieve a single post
+URI: /posts/{id}
+HTTP Method: GET
+c. save a post
+URI: /posts
+HTTP Method: POST
+d. update a post
+URI: /posts/{id}
+HTTP Method: PUT 
+
+5. Define hoisting and closures in JS.
+Hoisting is JavaScript's default behavior of moving declarations to the 
+top of the current scope (either global or function scope) before code execution. 
+This means that variables and function declarations can be used before they are declared 
+in the code.
+
+A closure is a function that retains access to its parent scope, even after the parent function has 
+finished executing. Closures allow inner functions to remember and access variables from their outer function’s scope, 
+even after that outer function has returned.
