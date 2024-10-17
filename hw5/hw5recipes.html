@@ -1,10 +1,53 @@
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipe List</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--Adds the background image for the styling requirement-->
+    <style>
+      #recipes {
+        background-image: url("https://www.shutterstock.com/image-photo/autumn-fall-baking-food-background-260nw-2023889963.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
   </head>
   <body>
-    <h1>Recipes</h1>
+    <h1>Recipe List</h1>
+
+    <!-- Form for adding new recipes -->
+    <form id="recipeForm">
+      <h2>Add New Recipe</h2>
+
+      <label for="name">Recipe Name:</label>
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <!-- Add multiple ingredients, each with quantity, name, and type -->
+      <div id="ingredientFields">
+        <h3>Ingredients:</h3>
+        <div class="ingredient">
+          <label>Quantity:</label>
+          <input type="text" class="ingredient-quantity" required />
+          <label>Name:</label>
+          <input type="text" class="ingredient-name" required />
+          <label>Type:</label>
+          <input type="text" class="ingredient-type" required />
+          <button type="button" id="addIngredient">
+            Add another ingredient</button
+          ><br /><br />
+        </div>
+      </div>
+
+      <label for="steps">Steps (separate by commas):</label>
+      <input type="text" id="steps" name="steps" required /><br /><br />
+
+      <button type="submit">Add Recipe</button>
+    </form>
+
+    <hr />
+
+    <h2>Current Recipes:</h2>
     <div id="recipes"></div>
 
     <script src="app.js"></script>
