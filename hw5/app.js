@@ -63,6 +63,7 @@ $(document).ready(function () {
         .val()
         .split(",")
         .map((step) => step.trim()),
+        //Had to do research and use a bit of ChatGPT to figure this out using map and trim
     };
 
     // Send POST request to the JSON server
@@ -77,9 +78,6 @@ $(document).ready(function () {
 
         // Clear the form after submission
         $("#recipeForm")[0].reset();
-      },
-      error: function () {
-        alert("Failed to add recipe.");
       },
     });
   });
