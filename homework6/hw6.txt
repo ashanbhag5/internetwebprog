@@ -1,0 +1,37 @@
+What is PHP? What do server side languages do in web development?
+
+PHP is a server-side scripting language used to create dynamic web pages by processing data, interacting with databases, and generating HTML.
+
+Server-side languages handle tasks like processing user input, managing databases, controlling sessions, and securing websites, 
+all of which occur on the server before the content is sent to the user's browser.
+
+2. What are some examples of how PHP and JavaScript are alike and how they differ?
+PHP and JavaScript are alike in several ways. Both are scripting languages used for web development and allow for dynamic content generation, 
+with PHP working on the server-side and JavaScript on the client-side. They also share similar syntax elements, such as variables, loops, and conditional 
+statements.
+
+However, they differ in key areas. PHP runs on the server, while JavaScript runs in the browser. PHP is primarily used for back-end tasks 
+like interacting with databases, whereas JavaScript is mainly for front-end tasks like handling user interface events. Additionally, JavaScript
+ can directly manipulate HTML and CSS, while PHP generates HTML that is sent to the browser.
+
+
+3. Why pick PHP over another server side scripting language?
+ PHP is widely adopted, offering extensive community support, documentation, and a variety of frameworks like Laravel to speed up development. It integrates easily with databases, 
+ particularly MySQL, making it ideal for data-driven applications.
+
+
+4. What’s the difference between the include and require keywords in PHP?
+include: If the file is missing or not found, include generates a warning but allows the script to continue executing.
+require: If the file is missing or not found, require generates a fatal error and stops the execution of the script immediately.
+
+
+a. What would happen if you tried to use a variable from a file that hasn’t been
+included yet?
+If you try to use a variable from a file that hasn't been included yet in PHP, an undefined variable error or notice will occur. Since the file containing the variable was not included,
+ PHP won't recognize the variable, leading to a warning or error indicating that the variable does not exist in the current scope.
+
+
+5. Compare and contrast echo and var_dump.
+
+echo: It is used to output simple strings or variables. It doesn't provide any type or detailed information about the data; it just prints the value.
+var_dump: It provides a detailed output that includes the data type and value. It’s useful for debugging because it shows arrays, objects, and even NULL values in full detail.
