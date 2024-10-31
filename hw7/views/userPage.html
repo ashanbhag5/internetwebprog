@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User List</title>
+    <style>
+      body {
+        background-color: #f4f4f4;
+        text-align: center;
+      }
+      #user-list {
+        list-style-type: none;
+        padding: 0;
+        max-width: 400px;
+        margin: auto;
+      }
+      #user-list li {
+        background: #fff;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User List</h1>
+    <ul id="user-list"></ul>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/users")
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              const userList = document.getElementById("user-list");
+              data.data.forEach((user) => {
+                const userItem = document.createElement("li");
+                userItem.textContent = `${user.name} - ${user.email}`;
+                userList.appendChild(userItem);
+              });
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

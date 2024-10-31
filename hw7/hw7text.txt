@@ -1,0 +1,65 @@
+1. Class is blueprint for creating objects, defines the properties
+behaviors that objects of that class will have
+
+Object is an instance of a class, can interact with object by calling
+its methods and accessing its properties
+
+OOP is a programming paradigm that revolves around the concept
+of objects
+
+2.Abstract class is used when you want to define a base class that represents
+a general concept but should not be instantiated on its own.
+Provide common interface and shared functionality
+
+3. Superglobals are predefined variables in PHP that are 
+accessible from any part of a script. Used to collect data
+$_Get - used to collect data sent in the url of a request
+$_Post - used to collect data sent in an http post request
+$_Session - used to store information about a user session across
+$_Cookie - used to store small amounts of data on the client's computer
+$_Server - contains information about server and execution root 
+Setting up and using a class via namespaces in PHP:
+
+4.
+Step 1: Define the namespace at the top of the PHP file where the class is declared.
+Step 2: Import and instantiate the class using the use keyword followed by the namespace, .
+
+
+
+5.
+MVC (Model-View-Controller):
+
+Model: Manages the data, logic, and rules of the application, often interacting with the database.
+View: Represents the user interface, displaying data to users and receiving user input.
+Controller: Acts as an intermediary between the Model and View, handling user input, updating the Model, and returning the View.
+
+
+6 & 7:
+
+<?php 
+class Person {
+    private $name;
+    private $age;
+    public function __construct($name, $age){
+        $this->name = $name;
+        $this->age = $age;
+    }
+
+    public function getName(){
+        return $this->name;
+    }
+    public function getAge(){
+        return $this->age;
+    }
+    public function setName($name){
+        $this->name = $name;
+    }
+    public function setAge($Age){
+        $this->age = $age;
+    }
+
+    public static function greet(){
+        return "Lets go yankees";
+    }
+}
+?>
