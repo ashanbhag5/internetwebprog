@@ -1,0 +1,43 @@
+1. Write a query string with 2 values for www.example.com
+www.example.com?name=John&age=25
+
+2. What is meant by escaping a character?
+Escaping a character means adding a special symbol (often a backslash \) before a character
+in a string to indicate that it should be treated differently than usual
+
+3. What are the following HTTP status and their meanings:
+a. 200
+- OK: indicates that request was successful
+b. 400
+- Bad Request: server could not understand due to invalid syntax
+c. 401
+- Unauthorized: client must authenticate 
+d. 403
+- Forbidden
+e. 404
+- Not Found: could not find requested resources
+f. 500
+- Internal Server Error: encountered an error and was unable to complete request
+4. Why do we need to validate data?
+Data validation is essential to ensure that data meets specific criteria before processing.
+It can also prevent security vulnerabilities like XSS attacks
+
+5. What are sessions and cookies? What do they do?
+Sessions and cookies are mechanisms for storing information about users to maintain continuity
+across different interactions on a website.
+Cookies - small text files stored on user's  browser by the website
+Sessions - store user data on the server rather than client side
+
+Together, they help websites remember user-specific data to create a seamless and personalized experience
+
+
+6. Create some kind of expectation in a try block, throw an exception with a custom
+message in the catch block
+try {
+    if (number <= 0) {
+            throw new Error("The number must be positive.");
+    }
+        console.log("The number is positive.");
+    } catch (error) {
+        console.error("Caught an exception:", error.message);
+    }
