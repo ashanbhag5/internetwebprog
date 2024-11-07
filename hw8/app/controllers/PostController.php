@@ -16,12 +16,10 @@ class PostController {
     }
 
     public function savePost() {
-        // Retrieve post data from form submission
         $title = $_POST['title'] ?? null;
         $content = $_POST['content'] ?? null;
         $errors = [];
 
-        // Validate title
         if ($title) {
             $title = htmlspecialchars($title);
             if (strlen($title) < 5) {
@@ -31,7 +29,6 @@ class PostController {
             $errors['title'] = 'Title is required.';
         }
 
-        // Validate content
         if ($content) {
             $content = htmlspecialchars($content);
             if (strlen($content) < 20) {
@@ -41,7 +38,6 @@ class PostController {
             $errors['content'] = 'Content is required.';
         }
 
-        // Return errors if any validation failed
         if (count($errors)) {
             http_response_code(400);
             echo json_encode($errors);
@@ -52,7 +48,6 @@ class PostController {
         $postModel = new Post();
         $postModel->savePost(['title' => $title, 'content' => $content]);
 
-        // Return the validated data
         $returnData = [
             'title' => $title,
             'content' => $content,

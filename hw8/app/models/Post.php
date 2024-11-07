@@ -8,12 +8,12 @@ class Post {
             [
                 'id' => '1',
                 'title' => 'Introduction to PHP',
-                'content' => 'This post covers basics of PHP programming.'
+                'content' => 'Test 1.'
             ],
             [
                 'id' => '2',
                 'title' => 'MVC Structure',
-                'content' => 'Understanding MVC structure in web applications.'
+                'content' => 'Test 2.'
             ],
         ];
 
@@ -27,6 +27,6 @@ class Post {
     }
 
     public function savePost($data) {
-        // Placeholder: in future, this would save a post to the database
+        //Placeholder
     }
 }
