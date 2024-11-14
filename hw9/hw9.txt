@@ -1,0 +1,40 @@
+1. What is SQL? MySQL? What are relational databases?
+
+SQL (Structured Query Language): It's a language designed to interact with relational databases. 
+It's used to manipulate, retrieve, and manage data within these databases. Common SQL operations include:
+
+MySQL: It's a popular open-source relational database management system (RDBMS) that uses SQL to interact with data. 
+It's widely used for web applications and other database-driven systems.
+
+Relational Databases: These databases organize data into tables, with rows representing records and columns representing fields. 
+Tables are linked together using relationships, allowing you to efficiently store and retrieve complex data.
+
+2. What is normalization in SQL?
+
+Normalization is the process of organizing data in a database to reduce redundancy and dependency, making it more efficient 
+and consistent. It involves breaking down large tables into smaller, more focused tables and defining relationships between them. The goal is to minimize data anomalies and improve data integrity.
+
+3. What are primary and foreign keys?
+
+
+
+Primary Key: A unique identifier for a record in a table. It cannot contain null values and must be unique 
+within the table. It's often used to establish relationships with other tables.
+
+Foreign Key: A column in one table that references the primary key of another table. It creates a link between 
+the two tables, defining a relationship.
+
+4.  What are the three relationship types?
+
+One-to-One: A single record in one table is related to exactly one record in another table.
+One-to-Many: A single record in one table is related to multiple records in another table.
+Many-to-Many: Multiple records in one table can be related to multiple records in another table. This relationship 
+is often implemented using a junction table.
+
+5. What is the difference between a left join and an inner join?
+
+Inner Join: Returns rows that have matching values in both tables. If there's no match, the row is not included in the result.
+Left Join: Returns all rows from the left table, and the matched rows from the right table. If there's no match in the right table, 
+null values are returned for the right table's columns.
+In essence, a left join includes all records from the left table, while an inner join only includes records that 
+have matches in both tables.
