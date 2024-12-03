@@ -1,8 +1,15 @@
+CREATE DATABASE nfl_data;
+USE nfl_data;
+
 CREATE TABLE IF NOT EXISTS player_stats (
   player_id VARCHAR(255),
   player_name VARCHAR(255),
   player_display_name VARCHAR(255),
   headshot_url TEXT,
+  position VARCHAR(50),
+  position_group VARCHAR(50),
+  attempts INT,
+  completions INT,
   season INT,
   week INT,
   recent_team VARCHAR(10),
@@ -20,6 +27,7 @@ CREATE TABLE IF NOT EXISTS player_stats (
   fantasy_points DOUBLE,
   fantasy_points_ppr DOUBLE
 );
+
 UPDATE player_stats
 SET 
   passing_yards = ROUND(passing_yards, 2),

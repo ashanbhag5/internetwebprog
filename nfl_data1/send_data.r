@@ -1,8 +1,13 @@
+install.packages("DBI")       # For database connections
+install.packages("dplyr")     # Data manipulation
+install.packages("RMariaDB") 
+install.packages("nflreadr")
 
 library(nflreadr)
 library(dplyr)
 library(DBI)
 library(RMariaDB)
+
 
 # Step 1: Load player stats for the desired seasons
 seasons <- 2020:2024
@@ -20,14 +25,16 @@ filtered_stats <- player_stats %>%
     fantasy_points, fantasy_points_ppr
   ) %>%
   filter(!is.na(player_id))  # Exclude rows with missing player_id
+  
 
-# Step 3: Connect to MySQL Database
+
+
 con <- dbConnect(
   MariaDB(),
-  user = "root",           
-  password = "",           
-  dbname = "nfl_data", 
-  host = "localhost"       
+  user = Sys.getenv("DBUSER"),           
+  password = Sys.getenv("DBPASS"),           
+  dbname = Sys.getenv("DBNAME"), 
+  host = Sys.getenv("DBHOST")       
 )
 
 dbWriteTable(
@@ -37,6 +44,8 @@ dbWriteTable(
   append = TRUE, 
   row.names = FALSE
 )
+print("Data successfully written to the 'player_stats' table.\n")
 
 # Step 6: Disconnect from the database
 dbDisconnect(con)
+print("Database connection closed.\n")

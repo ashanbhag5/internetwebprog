@@ -60,7 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Get player matchup (most recent team + current week matchup)
         if ($_GET['action'] === 'get_player_matchup' && isset($_GET['name'])) {
+            $playerController = new PlayerController();
             $playerName = $_GET['name'];
+            $playerController->getPlayerMatchup($playerName);
+            
 
             try {
                 // Get the player's most recent team
