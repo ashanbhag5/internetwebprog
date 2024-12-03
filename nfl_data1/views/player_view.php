@@ -662,6 +662,7 @@
                                 // Hide and clear the small table if the player is not a QB
                                 $('#small-table').hide();
                                 $('#small-table tbody').empty();
+                                console.log("HElLO")
                             }
                         } else {
                             $('#player-info').html('<p>No player data available.</p>');

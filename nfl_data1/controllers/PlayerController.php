@@ -10,21 +10,22 @@ $playerModel = new PlayerModel($db);
 
 class PlayerController
 {
-    public $db = (new Database())->connect();
-    public $playerModel = new PlayerModel($db);
+    //public $db = (new Database())->connect();
+    //public $playerModel = new PlayerModel($db);
 
 
 
 
     public function getPlayerStats($playerName)
     {
-        return $this->playerModel->getPlayerStats($playerName);
+        //return $this->playerModel->getPlayerStats($playerName);
     }
     public function getPlayerNames($query)
 
     {
         header('Content-Type: application/json');
-        return $this->playerModel->getPlayerNames($query);
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
         $data = $playerModel->getPlayerNames($query);
         echo json_encode($data);
         exit;
@@ -56,5 +57,104 @@ class PlayerController
             echo json_encode(['success' => false, 'error' => $e->getMessage()]);
             exit;
         }
+    }
+    public function getAllMatchups()
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+        $data = $playerModel->getAllMatchups();
+        echo json_encode($data);
+        exit;
+    }
+    public function getCurrentNFLWeek()
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+        $today = date('Y-m-d');
+        $currentWeek = $playerModel->getCurrentNFLWeek($today);
+        echo json_encode(['currentWeek' => $currentWeek]);
+        exit;
+    }
+    public function getMatchup($team, $week)
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+        $team = $_GET['team'];
+        $week = $_GET['week'];
+        $matchup = $playerModel->getMatchup($team, $week);
+        echo json_encode($matchup);
+        exit;
+    }
+    public function getMostRecentTeam($playerName)
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+        $recentTeam = $playerModel->getMostRecentTeam($playerName);
+        echo json_encode(['recent_team' => $recentTeam]);
+        exit;
+    }
+    public function getQBStats($playerName, $opponent)
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+
+        try {
+            $qbStats = $playerModel->getQBStats($playerName, $opponent);
+            if ($qbStats) {
+                echo json_encode($qbStats);
+            } else {
+                echo json_encode([]);
+            }
+            exit;
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'An error occurred while fetching QB stats.']);
+            exit;
+        }
+    }
+    public function getRBStats($playerName, $opponent)
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+
+        try {
+            $rbStats = $playerModel->getRBStats($playerName, $opponent);
+            if ($rbStats) {
+                echo json_encode($rbStats);
+            } else {
+                echo json_encode([]);
+            }
+            exit;
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'An error occurred while fetching RB stats.']);
+            exit;
+        }
+    }
+    public function getWRStats($playerName, $opponent)
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+        try {
+            $wrStats = $playerModel->getWRStats($playerName, $opponent);
+            if ($wrStats) {
+                echo json_encode($wrStats);
+            } else {
+                echo json_encode([]);
+            }
+            exit;
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'An error occurred while fetching WR stats.']);
+            exit;
+        }
+    }
+    public function getSavedPlayers()
+    {
+        $db = (new Database())->connect();
+        $playerModel = new PlayerModel($db);
+        $savedPlayers = $playerModel->getSavedPlayers();
+        echo json_encode($savedPlayers);
+        exit;
     }
 }

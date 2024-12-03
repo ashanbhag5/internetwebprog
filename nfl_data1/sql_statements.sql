@@ -49,14 +49,14 @@ SET
 CREATE TABLE matchups (
     week INT,
     date DATE,
-    week_1 VARCHAR(100),
-    week_2 VARCHAR(100)
+    team_1 VARCHAR(100),
+    team_2 VARCHAR(100)
 );
 
 
 
 
-INSERT INTO matchups (week, date, week_1, week_2) 
+INSERT INTO matchups (week, date, team_1, team_2) 
 VALUES 
 (13, '2024-11-30', 'Chicago', 'Detroit'),
 (13, '2024-11-30', 'N.Y. Giants', 'Dallas'),

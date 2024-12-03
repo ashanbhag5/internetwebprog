@@ -2,6 +2,8 @@
 require_once 'Database.php';
 require_once 'models/PlayerModel.php';
 require_once "controllers/PlayerController.php";
+require_once "controllers/PostController.php";
+
 
 
 // Create a database connection
@@ -17,11 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Autocomplete player names based on user query
         if ($_GET['action'] === 'getPlayerNames' && isset($_GET['query'])) {
             $playerController = new PlayerController();
-
             $query = $_GET['query'];
-            $data = $playerModel->getPlayerNames($query);
-            echo json_encode($data);
-            exit;
+            $playerController->getPlayerNames($query);
+
+
+            // $data = $playerModel->getPlayerNames($query);
+            // echo json_encode($data);
+            // exit;
         }
 
         // Get player statistics data
@@ -35,126 +39,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Get all matchups
         if ($_GET['action'] === 'getAllMatchups') {
-            $data = $playerModel->getAllMatchups();
-            echo json_encode($data);
-            exit;
+            $playerController = new PlayerController();
+
+            $playerController->getAllMatchups();
+            // $data = $playerModel->getAllMatchups();
+            // echo json_encode($data);
+            // exit;
         }
 
         // Get the current NFL week
         if ($_GET['action'] === 'getCurrentNFLWeek') {
-            $today = date('Y-m-d');
-            $currentWeek = $playerModel->getCurrentNFLWeek($today);
-            echo json_encode(['currentWeek' => $currentWeek]);
-            exit;
+            $playerController = new PlayerController();
+
+            $playerController->getCurrentNFLWeek();
         }
 
         // Get player matchup
         if ($_GET['action'] === 'getMatchup' && isset($_GET['team']) && isset($_GET['week'])) {
-
+            $playerController = new PlayerController();
             $team = $_GET['team'];
             $week = $_GET['week'];
-            $matchup = $playerModel->getMatchup($team, $week);
-            echo json_encode($matchup);
-            exit;
+            $playerController->getMatchup($team, $week);
         }
 
         // Get player matchup (most recent team + current week matchup)
         if ($_GET['action'] === 'get_player_matchup' && isset($_GET['name'])) {
+
             $playerController = new PlayerController();
             $playerName = $_GET['name'];
             $playerController->getPlayerMatchup($playerName);
-            
-
-            try {
-                // Get the player's most recent team
-                $team = $playerModel->getMostRecentTeam($playerName);
-
-                // Get the current NFL week
-                $week = $playerModel->getCurrentNFLWeek(date('Y-m-d'));
-
-                // Fetch the matchup for the team and week
-                $matchup = $playerModel->getMatchup($team, $week);
-
-                // Return the player matchup information
-                echo json_encode([
-                    'success' => true,
-                    'playerName' => $playerName,
-                    'team' => $team,
-                    'week' => $week,
-                    'matchup' => $matchup
-                ]);
-                exit;
-            } catch (Exception $e) {
-                echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-                exit;
-            }
         }
 
         // Get the player's most recent team
         if ($_GET['action'] === 'getMostRecentTeam' && isset($_GET['player_name'])) {
+            $playerController = new PlayerController();
             $playerName = $_GET['player_name'];
-            $recentTeam = $playerModel->getMostRecentTeam($playerName);
-            echo json_encode(['recent_team' => $recentTeam]);
-            exit;
+            $playerController->getMostRecentTeam($playerName);
         }
 
         // Get QB stats for a player and opponent
         if ($_GET['action'] === 'getQBStats' && isset($_GET['player_name']) && isset($_GET['opponent'])) {
+            $playerController = new PlayerController();
             $playerName = $_GET['player_name'];
             $opponent = $_GET['opponent'];
-
-            try {
-                $qbStats = $playerModel->getQBStats($playerName, $opponent);
-                if ($qbStats) {
-                    echo json_encode($qbStats);
-                } else {
-                    echo json_encode([]);
-                }
-                exit;
-            } catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode(['error' => 'An error occurred while fetching QB stats.']);
-                exit;
-            }
+            $playerController->getQBStats($playerName, $opponent);
         }
 
 
         if ($_GET['action'] === 'getRBStats' && isset($_GET['player_name']) && isset($_GET['opponent'])) {
+            $playerController = new PlayerController();
             $playerName = $_GET['player_name'];
             $opponent = $_GET['opponent'];
-
-            try {
-                $rbStats = $playerModel->getRBStats($playerName, $opponent);
-                if ($rbStats) {
-                    echo json_encode($rbStats);
-                } else {
-                    echo json_encode([]);
-                }
-                exit;
-            } catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode(['error' => 'An error occurred while fetching RB stats.']);
-                exit;
-            }
+            $playerController->getRBStats($playerName, $opponent);
         }
 
         if ($_GET['action'] === 'getWRStats' && isset($_GET['player_name']) && isset($_GET['opponent'])) {
+            $playerController = new PlayerController();
             $playerName = $_GET['player_name'];
             $opponent = $_GET['opponent'];
-
-            try {
-                $wrStats = $playerModel->getWRStats($playerName, $opponent);
-                if ($wrStats) {
-                    echo json_encode($wrStats);
-                } else {
-                    echo json_encode([]);
-                }
-                exit;
-            } catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode(['error' => 'An error occurred while fetching WR stats.']);
-                exit;
-            }
+            $playerController->getWRStats($playerName, $opponent);
         }
 
 
@@ -163,9 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Get all saved players
         if ($_GET['action'] === 'getSavedPlayers') {
-            $savedPlayers = $playerModel->getSavedPlayers();
-            echo json_encode($savedPlayers);
-            exit;
+            $playerController = new PlayerController();
+
+            $playerController->getSavedPlayers();
         }
     }
 
@@ -176,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'savePlayer') {
     header('Content-Type: application/json; charset=utf-8');
+
     $data = json_decode(file_get_contents('php://input'), true);
 
     if (isset($data['playerID'], $data['playerName'], $data['position'], $data['team'])) {
@@ -183,19 +127,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'savePlayer') {
         $playerName = $data['playerName'];
         $position = $data['position'];
         $team = $data['team'];
+        $postController = new PostController();
 
-        $success = $playerModel->savePlayer($playerID, $playerName, $position, $team);
-
-        if ($success) {
-            echo json_encode(['success' => true, 'playerId' => 'Success']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to save player in the database']);
-        }
+        $postController->savePlayer($playerID, $playerName, $position, $team);
     } else {
         echo json_encode(['success' => false, 'message' => 'Invalid data provided']);
     }
-    // Terminate script to prevent additional output
-    exit;
 }
 
 
@@ -206,21 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'deletePlayer')
     $input = json_decode(file_get_contents('php://input'), true);
     $playerId = $input['player_id'];
     $playerName = $input['player_name'];
+    $postController = new PostController();
+
+    $postController->deletePlayer($playerId, $playerName);
     error_log("Received player_id for deletion: " . $playerId);
-
-    if ($playerId) {
-        $success = $playerModel->deletePlayer($playerId, $playerName);
-
-        if ($success) {
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to delete player']);
-        }
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid player ID']);
-    }
-
-    exit;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'getQBStats') {
     // Include PlayerModel if not already included
@@ -230,18 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'getQBStats') {
     $postData = json_decode(file_get_contents('php://input'), true);
     $playerName = $postData['player_name'] ?? null;
     $opponent = $postData['opponent'] ?? null;
+    $postController = new PostController();
 
-    if ($playerName && $opponent) {
-        $qbStats = $playerModel->getQBStats($playerName, $opponent);
-        if ($qbStats) {
-            echo json_encode(['success' => true, 'data' => $qbStats]);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'No stats found for the player.']);
-        }
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid input.']);
-    }
-    exit;
+    $postController->postQBStats($playerName, $opponent);
 }
 
 
