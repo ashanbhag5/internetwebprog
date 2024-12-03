@@ -35,6 +35,7 @@ class PlayerModel
         'ATL' => 'Atlanta',
         'SF'  => 'San Francisco',
         'LAC' => 'L.A. Chargers',
+        'CLE' => 'Cleveland',
     ];
 
     // Constructor to initialize the database connection
@@ -65,17 +66,17 @@ class PlayerModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getPlayerData1($playerName)
-    {
-        $sql = "SELECT season, player_id, week, recent_team, opponent_team, position, fantasy_points, headshot_url, player_display_name 
-                FROM player_stats WHERE player_display_name = :player_name 
-                ORDER BY season ASC
-                LIMIT 1";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':player_name', $playerName, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // public function getPlayerData1($playerName)
+    // {
+    //     $sql = "SELECT season, player_id, week, recent_team, opponent_team, position, fantasy_points, headshot_url, player_display_name 
+    //             FROM player_stats WHERE player_display_name = :player_name 
+    //             ORDER BY season ASC
+    //             LIMIT 1";
+    //     $stmt = $this->db->prepare($sql);
+    //     $stmt->bindParam(':player_name', $playerName, PDO::PARAM_STR);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
 
 
 

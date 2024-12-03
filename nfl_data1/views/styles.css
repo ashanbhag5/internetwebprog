@@ -89,7 +89,7 @@ img {
   color: #333;
 }
 
-#stats-bar {
+/* #stats-bar {
   display: none;
   background-color: #bbb;
   color: white;
@@ -112,7 +112,7 @@ img {
 
 #stats-table {
   display: none;
-}
+} */
 
 .fetch-matchups {
   display: block;
@@ -132,7 +132,7 @@ img {
   background-color: #0056b3;
 }
 
-.small-table {
+/* .small-table {
   display: none;
   width: 50%;
   font-size: 12px;
@@ -145,9 +145,7 @@ img {
   text-align: left;
   border: 1px solid #ccc;
   /* Optional: Adds thin borders */
-}
-
-#qbheading {
+*/ #qbheading {
   display: none;
 }
 

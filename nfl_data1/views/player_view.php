@@ -135,10 +135,57 @@
         .delete-player-btn:hover {
             background-color: #cc0000;
         }
+
+        #qb-stats {
+            width: 60%;
+            float: left;
+            box-sizing: border-box;
+            /* To ensure padding doesn't affect width */
+        }
+
+        #qb-chart-container {
+            width: 28%;
+            float: right;
+            margin-left: 20px;
+            box-sizing: border-box;
+            /* Ensure padding doesn't affect width */
+        }
+
+        #small-table {
+            width: 100%;
+            /* Make the table take up the full available width of the parent container */
+        }
+
+        #stats-bar {
+            width: 100%;
+            /* Take up the entire width */
+            background-color: #f1f1f1;
+            /* Optional: Add background for the stats bar */
+            padding: 10px;
+            text-align: center;
+            /* Centers the text */
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            /* Adds some space between the table and the stats bar */
+            clear: both;
+            /* Ensures the stats bar clears the floated elements above it */
+        }
+
+        #stats-bar i {
+            margin-left: 10px;
+            /* Space between text and icon */
+        }
+
+        #qb-chart-container h3 {
+            text-align: center;
+            font-size: 18px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 
 </head>
@@ -154,7 +201,7 @@
             <div id="player-info" class="player-info"></div>
             <div id="week-info" class="week-info"></div>
             <div id="qb-stats">
-                <h3 id="qbheading">Stats Against Opponent</h3>
+                <h3 id="qbheading" style="display:none">Stats Against Opponent</h3>
                 <table id="small-table" class="small-table">
                     <!-- QB Headers -->
                     <thead id="qb-headers" style="display: none;">
@@ -196,17 +243,17 @@
                     </tbody>
                 </table>
             </div>
-            <div id="qb-chart-container">
+            <div id="qb-chart-container" style="display:none">
                 <h3>Completions vs. Attempts</h3>
-                <canvas id="qb-pie-chart" width="400" height="400"></canvas>
+                <canvas id="qb-pie-chart" width="200" height="200"></canvas>
             </div>
 
 
-            <div id="stats-bar">
+            <div id="stats-bar" style="display: none;">
                 4 Year Stats
                 <i class="fas fa-chevron-down"></i>
             </div>
-            <table id="stats-table">
+            <table id="stats-table" style="display: none;">
                 <thead>
                     <tr>
                         <th>Season</th>
@@ -385,6 +432,7 @@
                             });
 
                             if (player.position === 'QB') {
+
                                 // Ensure the small table is visible
 
 
@@ -440,6 +488,8 @@
                                                             $('#qbheading').show();
                                                             updateHeaders('qb')
                                                             fetchQBStats(playerName, matchupResponse);
+                                                            getQBstats(playerName, matchupResponse);
+
                                                         }
                                                     },
                                                     error: function(error) {
@@ -534,6 +584,7 @@
 
                             } else if (player.position === 'RB') {
                                 // Fetch current week
+                                console.log()
                                 $.ajax({
                                     url: 'index.php?action=getCurrentNFLWeek',
                                     method: 'GET',
@@ -642,7 +693,7 @@
 
                 // Fetch player data via AJAX GET request
                 $.ajax({
-                    url: 'index.php?action=getPlayerData1',
+                    url: 'index.php?action=getPlayerData',
                     method: 'GET',
                     data: {
                         player_name: playerName
@@ -783,6 +834,48 @@
                     }
                 });
             }
+
+
+
+            function getQBstats(playerName, opponent) {
+                $.ajax({
+                    url: 'index.php?action=getQBStats',
+                    method: 'GET',
+                    data: {
+                        player_name: playerName,
+                        opponent: opponent
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response) {
+                            // Initialize totals
+                            let totalCompletions = 0;
+                            let totalAttempts = 0;
+
+                            // Iterate through the stats array to compute totals
+                            response.forEach(stat => {
+                                totalCompletions += parseInt(stat.completions || 0, 10);
+                                totalAttempts += parseInt(stat.attempts || 0, 10);
+                            });
+
+                            console.log('Total Completions:', totalCompletions);
+                            console.log('Total Attempts:', totalAttempts);
+
+                            // Generate the QB pie chart with the totals
+                            generateQBPieChart(totalCompletions, totalAttempts);
+                        } else {
+                            alert(response.message || 'No stats found.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching QB stats:', error);
+                        console.log('Response:', xhr.responseText);
+                        $('#qb-stats-body').html('<tr><td colspan="4">Error fetching QB stats.</td></tr>');
+                    }
+                });
+            }
+
 
 
             loadSavedPlayers();
@@ -1029,21 +1122,19 @@
 
             // Show the appropriate header based on the position
             if (position === "qb") {
+                $('#qb-chart-container').show();
                 qbHeaders.style.display = "table-header-group";
             } else if (position === "rb") {
+                $('#qb-chart-container').hide();
                 rbHeaders.style.display = "table-header-group";
             } else if (position === "wr") {
+                $('#qb-chart-container').hide();
                 wrHeaders.style.display = "table-header-group";
             }
         }
 
-        // Function to add the player to the saved list
 
 
-        // Function to delete the player
-
-
-        // Load saved players when the page is loaded
 
 
         function getPlayerData(playerName, callback) {
@@ -1073,6 +1164,68 @@
                 }
             });
         }
+
+        function generateQBPieChart(completions, attempts) {
+            const total = completions + attempts;
+            const completionPercentage = ((completions / total) * 100).toFixed(1); // Calculate percentage
+
+            // Get or create the canvas element
+            const ctx = document.getElementById('qb-pie-chart').getContext('2d');
+
+            // Destroy existing chart instance if it exists
+            if (window.qbPieChart) {
+                window.qbPieChart.destroy();
+            }
+
+            // Create the pie chart
+            window.qbPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Completions', 'Missed'],
+                    datasets: [{
+                        data: [completions, attempts - completions],
+                        backgroundColor: ['#4caf50', '#f44336'], // Green for completions, red for attempts
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const label = tooltipItem.label || '';
+                                    const value = tooltipItem.raw;
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true, // Show the legend
+                            position: 'top'
+                        },
+                        annotation: {
+                            annotations: [{
+                                type: 'label',
+                                content: `${completionPercentage}%`, // Add percentage in the middle
+                                position: 'center',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                },
+                                color: '#000'
+                            }]
+                        }
+                    },
+                    plugins: {
+                        datalabels: {
+                            display: false // Hide individual data labels
+                        }
+                    }
+                }
+            });
+        }
+
 
         //fetchRBStats("Saquon Barkley", 'Philadelphia')
         //fetchQBStats('Patrick Mahomes', 'Buffalo');

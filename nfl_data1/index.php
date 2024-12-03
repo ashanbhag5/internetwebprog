@@ -1,6 +1,8 @@
 <?php
 require_once 'Database.php';
 require_once 'models/PlayerModel.php';
+require_once "controllers/PlayerController.php";
+
 
 // Create a database connection
 $db = (new Database())->connect();
@@ -14,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Autocomplete player names based on user query
         if ($_GET['action'] === 'getPlayerNames' && isset($_GET['query'])) {
+            $playerController = new PlayerController();
+
             $query = $_GET['query'];
             $data = $playerModel->getPlayerNames($query);
             echo json_encode($data);
@@ -27,12 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo json_encode($data);
             exit;
         }
-        if ($_GET['action'] === 'getPlayerData1' && isset($_GET['player_name'])) {
-            $playerName = $_GET['player_name'];
-            $data = $playerModel->getPlayerData1($playerName);
-            echo json_encode($data);
-            exit;
-        }
+
 
         // Get all matchups
         if ($_GET['action'] === 'getAllMatchups') {
@@ -51,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Get player matchup
         if ($_GET['action'] === 'getMatchup' && isset($_GET['team']) && isset($_GET['week'])) {
+
             $team = $_GET['team'];
             $week = $_GET['week'];
             $matchup = $playerModel->getMatchup($team, $week);
@@ -219,6 +219,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'deletePlayer')
 
     exit;
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'getQBStats') {
+    // Include PlayerModel if not already included
+    header('Content-Type: application/json');
+
+    // Get QB name and opponent from the POST data
+    $postData = json_decode(file_get_contents('php://input'), true);
+    $playerName = $postData['player_name'] ?? null;
+    $opponent = $postData['opponent'] ?? null;
+
+    if ($playerName && $opponent) {
+        $qbStats = $playerModel->getQBStats($playerName, $opponent);
+        if ($qbStats) {
+            echo json_encode(['success' => true, 'data' => $qbStats]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'No stats found for the player.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid input.']);
+    }
+    exit;
+}
+
 
 
 require_once 'views/player_view.php';

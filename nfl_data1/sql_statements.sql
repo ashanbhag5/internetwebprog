@@ -106,15 +106,6 @@ VALUES
 (16, '2024-12-21', 'Tampa Bay', 'Dallas'),
 (16, '2024-12-21', 'New Orleans', 'Green Bay');
 
-CREATE TABLE saved_players (
-    id INT AUTO_INCREMENT PRIMARY KEY,       -- Unique identifier for each entry
-    player_name VARCHAR(100) NOT NULL,       -- Name of the player
-    position ENUM('QB', 'RB', 'WR', 'TE', 'K', 'DEF') NOT NULL, -- Player position
-    team VARCHAR(50) NOT NULL,               -- Team the player belongs to
-    opponent_team VARCHAR(50),               -- Opponent team for the matchup
-    fantasy_points DECIMAL(10, 2),           -- Fantasy points scored by the player
-    saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp when the player was saved
-);
 
 CREATE TABLE saved_players (
     player_id VARCHAR(255) PRIMARY KEY,       -- Unique identifier for each entry
