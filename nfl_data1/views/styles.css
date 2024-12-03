@@ -1,0 +1,292 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Parent Flexbox Layout */
+.main-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 20px;
+  gap: 20px;
+}
+
+/* Main Content */
+.main-container {
+  flex: 2;
+  max-width: 65%;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.autocomplete-suggestions {
+  border: 1px solid #ccc;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  z-index: 9999;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.autocomplete-suggestions div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.autocomplete-suggestions div:hover {
+  background-color: #f0f0f0;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.player-info img {
+  width: 250px;
+  height: 200px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.player-info .week-info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+  color: #333;
+}
+
+#stats-bar {
+  display: none;
+  background-color: #bbb;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+#stats-bar i {
+  margin-left: 10px;
+}
+
+#stats-bar:hover {
+  background-color: #999;
+}
+
+#stats-table {
+  display: none;
+}
+
+.fetch-matchups {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.fetch-matchups:hover {
+  background-color: #0056b3;
+}
+
+.small-table {
+  display: none;
+  width: 50%;
+  font-size: 12px;
+  border-collapse: collapse;
+}
+
+.small-table th,
+.small-table td {
+  padding: 5px;
+  text-align: left;
+  border: 1px solid #ccc;
+  /* Optional: Adds thin borders */
+}
+
+#qbheading {
+  display: none;
+}
+
+#saved-players-container {
+  flex: 1;
+  /* Take less space than the main content */
+  max-width: 300px;
+  /* Set a maximum width */
+  background-color: #fff;
+  /* White background */
+  border: 1px solid #ddd;
+  /* Light border */
+  border-radius: 8px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
+  padding: 15px;
+  /* Add padding inside the box */
+  font-family: Arial, sans-serif;
+  /* Simple font */
+}
+
+/* Heading Styling */
+#saved-players-container h3 {
+  margin: 0 0 10px;
+  /* Margin below heading */
+  font-size: 18px;
+  color: #333;
+  /* Dark text color */
+  text-align: center;
+  /* Center-align the heading */
+  border-bottom: 2px solid #ddd;
+  /* Underline for emphasis */
+  padding-bottom: 5px;
+}
+
+/* List Styling */
+#saved-players-list {
+  list-style: none;
+  /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+#saved-players-list li {
+  display: flex;
+  justify-content: space-between;
+  /* Spread button and player name */
+  align-items: center;
+  /* Center align items */
+  padding: 8px;
+  margin-bottom: 5px;
+  background-color: #f5f5f5;
+  /* Light gray background for items */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Buttons Styling */
+.saved-player-btn {
+  background-color: #4caf50;
+  /* Green button */
+  color: white;
+  /* White text */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.remove-player-btn {
+  background-color: #e74c3c;
+  /* Red button */
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  /* Circular button */
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 0;
+}
+
+/* Hover Effects */
+.saved-player-btn:hover {
+  background-color: #45a049;
+  /* Darker green on hover */
+}
+
+.remove-player-btn:hover {
+  background-color: #c0392b;
+  /* Darker red on hover */
+}
+
+/* Limit Message Styling */
+#save-limit-message {
+  font-size: 12px;
+  text-align: center;
+}
+/* Style for player name link */
+.player-name-link {
+  color: #1a73e8; /* Modern blue shade */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.player-name-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-shadow: 0 0 5px rgba(26, 115, 232, 0.6); /* Subtle glow effect */
+  cursor: pointer;
+}
+
+/* Style for the saved player item */
+.saved-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style for delete button */
+.delete-player-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.delete-player-btn:hover {
+  background-color: #cc0000;
+}
