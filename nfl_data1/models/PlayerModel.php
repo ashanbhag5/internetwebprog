@@ -130,21 +130,18 @@ class PlayerModel
     {
         try {
             // Query to get the recent team name directly from player_stats
+            //Orders by descending 
             $query = "
                 SELECT recent_team 
                 FROM player_stats 
                 WHERE player_display_name = :player_name
-                ORDER BY season ASC 
+                ORDER BY season DESC 
                 LIMIT 1";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':player_name', $playerName, PDO::PARAM_STR);
             $stmt->execute();
             $teamName = $stmt->fetchColumn();
 
-            // Fallback to team mapping if team name is missing
-            // if (!$teamName && isset($this->teamMapping)) {
-            //     return $this->teamMapping[$teamName] ?? null;
-            // }
 
             return $this->teamMapping[$teamName];
         } catch (PDOException $e) {

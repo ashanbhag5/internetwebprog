@@ -9,7 +9,6 @@
     <style>
         #saved-players-container {
             flex: 1;
-            /* Take less space than the main content */
             max-width: 300px;
             /* Set a maximum width */
             background-color: #fff;
@@ -23,7 +22,6 @@
             padding: 15px;
             /* Add padding inside the box */
             font-family: Arial, sans-serif;
-            /* Simple font */
         }
 
         /* Heading Styling */
@@ -36,7 +34,6 @@
             text-align: center;
             /* Center-align the heading */
             border-bottom: 2px solid #ddd;
-            /* Underline for emphasis */
             padding-bottom: 5px;
         }
 
@@ -120,7 +117,7 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-
+        /* Adds red color for delete button and more transitions */
         .delete-player-btn {
             background-color: #ff4d4d;
             color: #fff;
@@ -130,19 +127,19 @@
             cursor: pointer;
             font-size: 0.9rem;
             transition: background-color 0.3s ease;
-        }
-
+        }  
+        /* Adds style for hover*/
         .delete-player-btn:hover {
             background-color: #cc0000;
         }
-
+        /* Stats table for the player */
         #qb-stats {
             width: 60%;
             float: left;
             box-sizing: border-box;
             /* To ensure padding doesn't affect width */
         }
-
+        /* Styles the pie chart next to the qb stats */
         #qb-chart-container {
             width: 28%;
             float: right;
@@ -150,7 +147,7 @@
             box-sizing: border-box;
             /* Ensure padding doesn't affect width */
         }
-
+        
         #small-table {
             width: 100%;
             /* Make the table take up the full available width of the parent container */
@@ -196,16 +193,24 @@
         <div class="main-container">
             <h1>Player Fantasy Stats</h1>
             <input type="text" id="player-name" placeholder="Search for a player...">
+            <!-- Input for user where they input player-->
+            
             <div id="autocomplete-suggestions" class="autocomplete-suggestions"></div>
+            <!-- Adds autocomplete feature where it will only let you select players in the database-->
             <button id="save-player-btn" class="save-player-btn" data-player="Player Name">Save Player</button>
+            <!-- Saves player to the saved_players database-->
             <div id="player-info" class="player-info"></div>
+            <!-- Formats the player info like upcoming opponent-->
             <div id="week-info" class="week-info"></div>
+
+            <!-- Gets the chart for how player does against opponent-->
             <div id="qb-stats">
                 <h3 id="qbheading" style="display:none">Stats Against Opponent</h3>
                 <table id="small-table" class="small-table">
                     <!-- QB Headers -->
                     <thead id="qb-headers" style="display: none;">
                         <tr>
+                            <!-- QB column headers-->
                             <th>Season</th>
                             <th>Opponent Team </th>
                             <th>Completions</th>
@@ -243,16 +248,18 @@
                     </tbody>
                 </table>
             </div>
+            <!-- Adds pie chart stats only for QBs-->
             <div id="qb-chart-container" style="display:none">
                 <h3>Completions vs. Attempts</h3>
                 <canvas id="qb-pie-chart" width="200" height="200"></canvas>
             </div>
 
-
+            <!-- Gives 4 year stats for the the past 4 years-->
             <div id="stats-bar" style="display: none;">
                 4 Year Stats
                 <i class="fas fa-chevron-down"></i>
             </div>
+
             <table id="stats-table" style="display: none;">
                 <thead>
                     <tr>
@@ -267,9 +274,11 @@
             <!-- <button class="fetch-matchups" id="fetch-matchups">Fetch Matchups</button> -->
             <div id="week-info" class="week-info"></div>
         </div>
+        <!-- Saved player container-->
         <div id="saved-players-container">
             <h3>Saved Players</h3>
             <ul id="saved-players-list"></ul>
+            <!-- Players added here -->
             <p id="save-limit-message" style="display: none; color: red;">You can only save up to 5 players.</p>
         </div>
     </div>
@@ -320,7 +329,7 @@
             $('#fetch-matchups').on('click', function() {
                 getAllMatchups();
             });
-
+            // Gets info and stats when a player is selected
             function getAllMatchups() {
                 $.ajax({
                     url: 'index.php?action=getAllMatchups',
@@ -379,11 +388,15 @@
                 var playerName = $(this).data('player');
                 $('#player-name').val(playerName);
                 $('#autocomplete-suggestions').empty();
+                // Once clicked, it empties the autocomplete suggestions
+
+                // Gets player data on click
                 fetchPlayerData(playerName);
                 //displayPlayerMatchup(playerName);
                 getMostRecentTeam(playerName)
             });
 
+            // gets Matchup
             function getMatchup(team, week) {
                 return $.ajax({
                     url: 'index.php?action=getMatchup',
@@ -395,7 +408,7 @@
                     dataType: 'json'
                 });
             }
-
+            // Gets player data to be populated once clicked
             function fetchPlayerData(playerName) {
                 $.ajax({
                     url: 'index.php?action=getPlayerData',
@@ -405,6 +418,8 @@
                     },
                     dataType: 'json',
                     success: function(response) {
+                        var lastPlayer = response[response.length - 1];
+                        console.log(lastPlayer)
 
                         if (response && response.length > 0) {
                             var player = response[0];
@@ -413,9 +428,10 @@
                             $('#player-info').html(`
                     <img src="${player.headshot_url}" alt="${player.player_display_name}"><br>
                     <strong><h2>${player.player_display_name}</h2></strong><br><br>
-                    <p><strong>Team:</strong> ${player.recent_team}</p><br><br>
+                    <p><strong>Team:</strong> ${lastPlayer.recent_team}</p><br><br>
                 `);
-
+                            // Shows stats bar and body once chosen
+                            // Empties table
                             $('#stats-bar').show();
                             $('#stats-table tbody').empty();
 
@@ -487,7 +503,9 @@
                                                             $('#small-table').show();
                                                             $('#qbheading').show();
                                                             updateHeaders('qb')
+                                                            // Gets the qb headers
                                                             fetchQBStats(playerName, matchupResponse);
+                                                            //Gets qb stats and adds it to the qb-stats
                                                             getQBstats(playerName, matchupResponse);
 
                                                         }
@@ -505,6 +523,7 @@
                                         });
                                     },
                                     error: function(error) {
+                                        //Error logging
                                         console.error('Error fetching NFL week:', error);
                                         $('#matchup-info').html('Error fetching NFL week.');
                                     }
@@ -561,7 +580,9 @@
                                                             $('#small-table').show();
                                                             $('#qbheading').show();
                                                             updateHeaders('wr')
+                                                            //Updates headers to wr 
                                                             fetchWRStats(playerName, matchupResponse);
+                                                            //Adds wr stats to table
                                                         }
                                                     },
                                                     error: function(error) {
@@ -637,10 +658,13 @@
                                                             $('#small-table').show();
                                                             $('#qbheading').show();
                                                             updateHeaders('rb')
+                                                            //Update headers for running back
                                                             fetchRBStats(playerName, matchupResponse);
+                                                            //Gets rb stats and populates table
                                                         }
                                                     },
                                                     error: function(error) {
+                                                        //Error logging
                                                         console.error('Error fetching matchup data:', error);
                                                         $('#matchup-info').html('Error fetching matchup data.');
                                                     }
@@ -682,6 +706,7 @@
                 });
             }
 
+            //Saves buttons in js
             const savePlayerButton = $('#save-player-btn');
             const savedPlayersList = $('#saved-players-list');
             const saveLimitMessage = $('#save-limit-message');
@@ -992,7 +1017,7 @@
                 }
             });
         }
-
+        //Populates table with a GET request from the database
         function fetchQBStats(playerName, opponent) {
             $.ajax({
                 url: 'index.php?action=getQBStats',
@@ -1032,7 +1057,7 @@
                 }
             });
         }
-
+        //Populates table with a GET request from the database
         function fetchRBStats(playerName, opponent) {
             $.ajax({
                 url: 'index.php?action=getRBStats',
@@ -1070,7 +1095,7 @@
                 }
             });
         }
-
+        //Populates table with a GET request from the database
         function fetchWRStats(playerName, opponent) {
             $.ajax({
                 url: 'index.php?action=getWRStats',
@@ -1109,7 +1134,7 @@
                 }
             });
         }
-
+        //Updates headers with correct stats for position
         function updateHeaders(position) {
             const qbHeaders = document.getElementById("qb-headers");
             const rbHeaders = document.getElementById("rb-headers");

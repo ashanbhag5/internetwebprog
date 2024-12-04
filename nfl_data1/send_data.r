@@ -28,7 +28,7 @@ filtered_stats <- player_stats %>%
   
 
 
-
+#Step 4 connect to the database using environment variables
 con <- dbConnect(
   MariaDB(),
   user = Sys.getenv("DBUSER"),           
@@ -37,6 +37,7 @@ con <- dbConnect(
   host = Sys.getenv("DBHOST")       
 )
 
+#Write the table to player_stats
 dbWriteTable(
   con,
   name = "player_stats",
@@ -45,6 +46,7 @@ dbWriteTable(
   row.names = FALSE
 )
 print("Data successfully written to the 'player_stats' table.\n")
+
 
 # Step 6: Disconnect from the database
 dbDisconnect(con)

@@ -21,14 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $playerController = new PlayerController();
             $query = $_GET['query'];
             $playerController->getPlayerNames($query);
+            //Gets closest player names
 
 
-            // $data = $playerModel->getPlayerNames($query);
-            // echo json_encode($data);
-            // exit;
         }
 
-        // Get player statistics data
+        // Get player statistics data from the db
         if ($_GET['action'] === 'getPlayerData' && isset($_GET['player_name'])) {
             $playerName = $_GET['player_name'];
             $data = $playerModel->getPlayerData($playerName);
@@ -85,23 +83,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $playerController->getQBStats($playerName, $opponent);
         }
 
-
+        // Get RB stats for a player and opponent
         if ($_GET['action'] === 'getRBStats' && isset($_GET['player_name']) && isset($_GET['opponent'])) {
             $playerController = new PlayerController();
             $playerName = $_GET['player_name'];
             $opponent = $_GET['opponent'];
             $playerController->getRBStats($playerName, $opponent);
         }
-
+        // Get WR stats for a player and opponent
         if ($_GET['action'] === 'getWRStats' && isset($_GET['player_name']) && isset($_GET['opponent'])) {
             $playerController = new PlayerController();
             $playerName = $_GET['player_name'];
             $opponent = $_GET['opponent'];
             $playerController->getWRStats($playerName, $opponent);
         }
-
-
-        // Delete a player from saved players
 
 
         // Get all saved players
@@ -114,15 +109,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 
 
-    // Default to loading the player view
 
 }
+//Save a player
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'savePlayer') {
     header('Content-Type: application/json; charset=utf-8');
 
     $data = json_decode(file_get_contents('php://input'), true);
 
     if (isset($data['playerID'], $data['playerName'], $data['position'], $data['team'])) {
+        //Gets these 4 pieces of data and sends it to the post controller
         $playerID = $data['playerID'];
         $playerName = $data['playerName'];
         $position = $data['position'];
@@ -135,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'savePlayer') {
     }
 }
 
-
+//Delete player
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'deletePlayer') {
     header('Content-Type: application/json');
 
@@ -144,15 +140,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'deletePlayer')
     $playerId = $input['player_id'];
     $playerName = $input['player_name'];
     $postController = new PostController();
-
+    //Deletes player
     $postController->deletePlayer($playerId, $playerName);
     error_log("Received player_id for deletion: " . $playerId);
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'getQBStats') {
-    // Include PlayerModel if not already included
+    
     header('Content-Type: application/json');
 
     // Get QB name and opponent from the POST data
+    //This is for the pie chart stats
     $postData = json_decode(file_get_contents('php://input'), true);
     $playerName = $postData['player_name'] ?? null;
     $opponent = $postData['opponent'] ?? null;
@@ -162,5 +159,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'getQBStats') {
 }
 
 
-
+//Requires the player view
 require_once 'views/player_view.php';
