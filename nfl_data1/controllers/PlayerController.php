@@ -22,6 +22,12 @@ class PlayerController
     // Function to get player names based on a search query
     public function getPlayerNames($query)
     {
+        //Data validation
+        if (empty($query) || !is_string($query)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid query.']);
+            exit;
+        }
+
         // Set the header for JSON response
         header('Content-Type: application/json');
 
@@ -42,6 +48,12 @@ class PlayerController
     // Function to get the matchup for a specific player
     public function getPlayerMatchup($playerName)
     {
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+
         // Create a new database connection
         $db = (new Database())->connect();
 
@@ -129,6 +141,11 @@ class PlayerController
     // Function to get the most recent team of a player
     public function getMostRecentTeam($playerName)
     {
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
         // Create a new database connection
         $db = (new Database())->connect();
 
@@ -146,6 +163,17 @@ class PlayerController
     // Function to get quarterback stats for a player against an opponent
     public function getQBStats($playerName, $opponent)
     {
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+        // Validates the opponent name
+        if (empty($opponent) || !is_string($opponent)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid opponent name.']);
+            exit;
+        }
+
         // Create a new database connection
         $db = (new Database())->connect();
 
@@ -174,6 +202,17 @@ class PlayerController
     // Function to get running back stats for a player against an opponent
     public function getRBStats($playerName, $opponent)
     {
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+        // Validates the opponent name
+        if (empty($opponent) || !is_string($opponent)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid opponent name.']);
+            exit;
+        }
+
         // Create a new database connection
         $db = (new Database())->connect();
 
@@ -202,6 +241,17 @@ class PlayerController
     // Function to get wide receiver stats for a player against an opponent
     public function getWRStats($playerName, $opponent)
     {
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+        // Validates the opponent name
+        if (empty($opponent) || !is_string($opponent)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid opponent name.']);
+            exit;
+        }
+
         // Create a new database connection
         $db = (new Database())->connect();
 

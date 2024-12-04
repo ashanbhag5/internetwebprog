@@ -21,6 +21,12 @@ class PostController
     // Method to retrieve player names based on a search query
     public function getPlayerNames($query)
     {
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+        
         header('Content-Type: application/json');  // Set the content type to JSON for the response
         $db = (new Database())->connect();  // Establish a new database connection
         $playerModel = new PlayerModel($db);  // Instantiate the PlayerModel
@@ -32,6 +38,22 @@ class PostController
     // Method to save a player's data to the database
     public function savePlayer($playerID, $playerName, $position, $team)
     {
+
+        // Validates the player name
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+        // Validates the string of the position
+        if (empty($position) || !is_string($position)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid position.']);
+            exit;
+        }
+        // Validates the string of the team 
+        if (empty($team) || !is_string($team)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid team name.']);
+            exit;
+        }
         $db = (new Database())->connect();  // Create a new database connection
         $playerModel = new PlayerModel($db);  // Instantiate the PlayerModel with the database connection
         $success = $playerModel->savePlayer($playerID, $playerName, $position, $team);  // Save the player to the database
@@ -67,18 +89,26 @@ class PostController
     // Method to post QB (Quarterback) statistics based on player name and opponent
     public function postQBStats($playerName, $opponent)
     {
+        // Validate player name and opponent (both should not be empty and should be strings)
+        if (empty($playerName) || !is_string($playerName)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid player name.']);
+            exit;
+        }
+
+        if (empty($opponent) || !is_string($opponent)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid opponent name.']);
+            exit;
+        }
+
         $db = (new Database())->connect();  // Create a new database connection
         $playerModel = new PlayerModel($db);  // Instantiate the PlayerModel with the database connection
-        if ($playerName && $opponent) {  // Ensure both player name and opponent are provided
-            $qbStats = $playerModel->getQBStats($playerName, $opponent);  // Fetch QB stats for the given player and opponent
-            if ($qbStats) {
-                echo json_encode(['success' => true, 'data' => $qbStats]);  // Return success with QB stats if found
-            } else {
-                echo json_encode(['success' => false, 'message' => 'No stats found for the player.']);  // Return error if no stats are found
-            }
+        $qbStats = $playerModel->getQBStats($playerName, $opponent);  // Fetch QB stats for the given player and opponent
+
+        if ($qbStats) {
+            echo json_encode(['success' => true, 'data' => $qbStats]);  // Return success with QB stats if found
         } else {
-            echo json_encode(['success' => false, 'message' => 'Invalid input.']);  // Return error if player name or opponent is missing
+            echo json_encode(['success' => false, 'message' => 'No stats found for the player.']);  // Return error if no stats are found
         }
-        exit;
+        exit;  // End the script
     }
 }
