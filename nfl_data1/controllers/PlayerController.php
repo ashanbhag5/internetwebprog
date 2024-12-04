@@ -14,6 +14,7 @@ class PlayerController
     // Function to get player stats (currently not implemented)
     public function getPlayerStats($playerName)
     {
+
         // This function is meant to return the stats of a player based on the player name.
         // It will call the getPlayerStats method of the PlayerModel class.
         //return $this->playerModel->getPlayerStats($playerName);
@@ -124,6 +125,14 @@ class PlayerController
     // Function to get a specific matchup based on the team and week
     public function getMatchup($team, $week)
     {
+        if (empty($team) || !is_string($team)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid team name.']);
+            exit;
+        }
+        if (empty($week) || !is_string($week)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid week name.']);
+            exit;
+        }
         // Create a new database connection
         $db = (new Database())->connect();
 
