@@ -1,6 +1,7 @@
 CREATE DATABASE nfl_data;
 USE nfl_data;
 
+--Creates table for player stats
 CREATE TABLE IF NOT EXISTS player_stats (
   player_id VARCHAR(255),
   player_name VARCHAR(255),
@@ -28,6 +29,7 @@ CREATE TABLE IF NOT EXISTS player_stats (
   fantasy_points_ppr DOUBLE
 );
 
+--Rounds player stats
 UPDATE player_stats
 SET 
   passing_yards = ROUND(passing_yards, 2),
@@ -45,7 +47,7 @@ SET
 
 
 
-
+--Creates matchups table
 CREATE TABLE matchups (
     week INT,
     date DATE,
@@ -55,7 +57,7 @@ CREATE TABLE matchups (
 
 
 
-
+--Populates table
 INSERT INTO matchups (week, date, team_1, team_2) 
 VALUES 
 (13, '2024-11-30', 'Chicago', 'Detroit'),
@@ -114,7 +116,7 @@ VALUES
 (16, '2024-12-21', 'Tampa Bay', 'Dallas'),
 (16, '2024-12-21', 'New Orleans', 'Green Bay');
 
-
+--Creates saved players table
 CREATE TABLE saved_players (
     player_id VARCHAR(255) PRIMARY KEY,       -- Unique identifier for each entry
     player_name VARCHAR(100) NOT NULL,       -- Name of the player
